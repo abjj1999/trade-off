@@ -40,9 +40,9 @@ export default function TradePreviewCard() {
 
         <div className="mt-6 grid gap-3 rounded-2xl border border-white/10 bg-black/20 p-4">
           <SummaryRow label="Trade percent" value="80%" />
-          <SummaryRow label="Trade-in value" value="$496.00" />
-          <SummaryRow label="Cash difference" value="$16.00" />
-          <SummaryRow label="Estimated profit" value="$32.00" highlight />
+          <SummaryRow label="Trade-in value" value="$500.00" />
+          <SummaryRow label="Cash difference" value="-$20.00" negative />{" "}
+          <SummaryRow label="Estimated profit" value="$120.00" highlight />
         </div>
       </CardContent>
     </Card>
@@ -79,18 +79,29 @@ function SummaryRow({
   label,
   value,
   highlight,
+  positive,
+  negative,
 }: {
   label: string;
   value: string;
   highlight?: boolean;
+  positive?: boolean;
+  negative?: boolean;
 }) {
   return (
     <div className="flex justify-between text-sm">
       <span className="text-slate-500">{label}</span>
+
       <span
-        className={
-          highlight ? "font-semibold text-indigo-300" : "text-slate-200"
-        }
+        className={[
+          "font-medium",
+          highlight && "text-indigo-300",
+          positive && "text-emerald-400",
+          negative && "text-red-400",
+          !highlight && !positive && !negative && "text-slate-200",
+        ]
+          .filter(Boolean)
+          .join(" ")}
       >
         {value}
       </span>
