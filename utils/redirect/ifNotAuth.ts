@@ -2,7 +2,7 @@ import { redirect } from "next/navigation";
 
 import { createClient } from "../supabase/server";
 
-export async function redirectIfNotAuth(path = "/login") {
+export async function redirectIfNotAuth(path = "/signin") {
   const supabase = await createClient();
   const { data } = await supabase.auth.getUser();
   if (!data?.user) {
